@@ -3,7 +3,7 @@
     --main-text-color: #D9EAD3;
 }
 
-body
+body, .card-body
 {
     background-color: var(--main-text-color);
 }
@@ -25,4 +25,18 @@ nav > ul {
 
 nav > ul > li {
     display: inline;
+}
+
+.card{
+    border: 3px solid black;
+}
+
+.card-header
+{
+    background-color: var(--header-bg-color);
+}
+
+.myCardHeaderText
+{
+    color: var(--main-text-color);
 }
