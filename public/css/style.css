@@ -1,0 +1,28 @@
+:root {
+    --header-bg-color: #231010;
+    --main-text-color: #D9EAD3;
+}
+
+body
+{
+    background-color: var(--main-text-color);
+}
+
+header
+{
+    background-color: var(--header-bg-color);
+    color: var(--main-text-color);
+    height: 5vh;
+    width: 100%;
+}
+
+nav > ul {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    float: right;
+}
+
+nav > ul > li {
+    display: inline;
+}
