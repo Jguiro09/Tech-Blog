@@ -1,4 +1,4 @@
-const router = requireA('express').Router();
+const router = require('express').Router();
 const { User } = require('../../models');
 
 router.post('/', async (req, res) => {
@@ -8,7 +8,7 @@ router.post('/', async (req, res) => {
             password: req.body.password,
         });
 
-        res.session.save(() => {
+        req.session.save(() => {
             req.session.loggedIn = true;
 
             res.status(200).json(dbUserData)
