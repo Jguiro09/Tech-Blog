@@ -27,6 +27,10 @@ nav > ul > li {
     display: inline;
 }
 
+.hidden{
+    display: none;
+}
+
 .card{
     border: 3px solid black;
 }
@@ -39,4 +43,26 @@ nav > ul > li {
 .myCardHeaderText
 {
     color: var(--main-text-color);
+    display: inline-block;
+
+}
+
+.main{
+    text-align: center;
+}
+
+#newPost{
+    position: absolute;
+    width:100%;
+    bottom: 15;
+}
+
+#myBtn{
+    background-color: var(--header-bg-color);
+    color: var(--main-text-color);
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 16px;
+    height: 7vh;
+    width: 7vw;
 }

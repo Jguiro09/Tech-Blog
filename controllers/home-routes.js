@@ -1,43 +1,55 @@
 const router = require('express').Router();
-const Blog = require('../models/Blog');
-const { User } = require('../models/User');
+const {Blog, User, Comment} = require('../models');
 
-router.get('/', async (req, res) => {
-    const blogData = await Blog.findAll().catch((err) => {
-        res.json(err);
-    });
-    const blogs = blogData.map((dish) => dish.get({plain: true}));
 
-    res.render('home', { blogs,
-        loggedIn: req.session.loggedIn
-    });
-});
-
-router.get('/dashboard', async (req, res) => {
-    if(!req.session.loggedIn){
-        res.redirect('/login')
-        alert('You need to be logged in!');
-    }
-    else
-    {
-        const blogData = await Blog.findAll().catch((err) => {
-            res.json(err);
-        });
-        const blogs = blogData.map((dish) => dish.get({plain: true}));
-        res.render('dashboard', {
-            blogs,
+router.get('/', (req, res) => {
+    Blog.findAll({
+            include: {
+                model: User,
+                attributes: ['username'],
+            },
+    })
+    .then((blogData) => {
+        const blogs = blogData.map((blog) => blog.get({plain: true}));
+        res.render('home', { blogs,
             loggedIn: req.session.loggedIn
         });
-    }
+    })
 });
 
-router.get('/login', async (req, res) => {
-    res.render('login', {
-        loggedIn: req.session.loggedIn
-    });
+router.get('/post/:id', (req, res) => {
+    Blog.findOne({
+        where: {
+            id: req.params.id
+        },
+
+        include: [
+            {
+                model: User,
+                attributes: ['username'],
+            },
+            {
+                model: Comment,
+                attributes: ['id', 'content', 'blog_id', 'user_id']
+            },
+        ]
+    })
+    .then((results) => {
+        const blogs = results.get({plain: true});
+        console.log(blogs);
+        res.render('viewBlog', {
+            blogs,
+            loggedIn: req.session.loggedIn,
+        });
+    })
+    .catch((err) => res.json(err))
 });
 
-router.get('/signup', async (req, res) => {
+router.get('/login', (req, res) => {
+    res.render('login', {})
+});
+
+router.get('/signup',  (req, res) => {
     res.render('signup', {
         loggedIn: req.session.loggedIn
     });
