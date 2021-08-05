@@ -22,7 +22,7 @@ router.get('/', withAuth, async (req, res) => {
         });
 });
 
-router.get('/dashboard/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
     if(!req.session.loggedIn){
         res.redirect('/login')
         alert('You need to be logged in!');
