@@ -1,13 +1,13 @@
 [
     {
-        "title": "Blog 1",
+        "title": "I love Computer Science!",
         "text": "THIS IS SO COOL",
         "user_id": 1
     },
 
     {
-        "title": "Blog 2",
-        "text": "THIS IS SO AMAZING",
-        "user_id": 1
+        "title": "I can't center a Div!",
+        "text": "Anyone else struggle with this?",
+        "user_id": 2
     }
 ]
