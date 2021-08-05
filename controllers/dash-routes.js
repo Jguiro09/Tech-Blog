@@ -1,13 +1,8 @@
 const router = require('express').Router();
 const {Blog, User} = require('../models/');
+const withAuth = require ('../utils/auth');
 
-router.get('/', async (req, res) => {
-    if(!req.session.loggedIn){
-        res.redirect('/login')
-        alert('You need to be logged in!');
-    }
-    else
-    {
+router.get('/', withAuth, async (req, res) => {
         const blogData = await Blog.findAll({
             where: {
                 user_id: req.session.user_id
@@ -25,7 +20,6 @@ router.get('/', async (req, res) => {
             blogs,
             loggedIn: req.session.loggedIn
         });
-    }
 });
 
 router.get('/post/:id', async (req, res) => {
